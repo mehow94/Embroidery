@@ -69,6 +69,17 @@ You'll have to:
 0 1 2 2 2 2 2 2 2 1 0
 1 1 1 1 1 1 1 1 1 1 1
 ```
+
+```
+blocks == 4 => block_width = 13
+blocks == 4 => block_width = 11
+blocks == 3 => block_width = 9
+blocks == 2 => block_width = 7
+blocks == 1 => block_width = 5
+
+blocks == 0 => block_width = 3  ==> 3 + 2 * blocks
+
+```
     - There are further optional parameters, `border_color` and `fill_color`, all with default values of `1`.
     - Called with default arguments, the returned matrix shows a Christmas tree made of `blocks` pieces of trapezoid blocks and filled with `1`s. Each block has 3 rows, and each first row is one step shorter than the last row of the block above.
     - The triangle's border has `border_color`, and it is filled with `fill_color`.
