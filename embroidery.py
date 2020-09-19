@@ -1,4 +1,5 @@
 import math
+import sys
 
 def draw_rectangle(width, height, border_width=1, border_color=1, fill_color=1):
     matrix = []
@@ -87,9 +88,19 @@ def no_color_embroider(matrix):
         print()
     print()
 
+def save_to_file(matrix, filename="output.txt", color_scheme = {0: 0, 1: 1, 2: 2, 3: 3}):
+    with open(filename, "w+") as file_to_wrtie:
+        for row in matrix:
+            for cell in row:
+                file_to_wrtie.write(str(color_scheme[cell]))
+            file_to_wrtie.write("\n")
+        file_to_wrtie.write("\n")
+
+
+
 
 if __name__ == '__main__':
-    color_scheme = {0: ' ', 1: '*', 2: '.'}
+    print(sys.argv)
     # embroider([
     #     [0, 0, 0, 1, 0, 0, 0], 
     #     [0, 0, 1, 2, 1, 0, 0], 
@@ -100,8 +111,23 @@ if __name__ == '__main__':
     # my_border_color = 3
     # embroider(draw_rectangle(9, 10, border_width=2,border_color=2, fill_color=0), color_scheme)
 
-    #no_color_embroider(draw_christmas_tree(5))
+    blocks = 5
+    if len(sys.argv) >= 3:
+        blocks = int(sys.argv[2])
+
+    color_scheme = {0: ' ', 1: '*', 2: '.'}
+    if len(sys.argv) >= 4:
+        if sys.argv[3] == '--color':
+            color_scheme = {0: ' ', 1: '\033[93m*\033[0m', 2: '\033[92m.\033[0m'}
+
+
+
+    if sys.argv[1] == '--print':
+        embroider(draw_christmas_tree(blocks, fill_color=2), color_scheme=color_scheme)
+    
+    if sys.argv[1] == '--save':
+        save_to_file(draw_christmas_tree(blocks, fill_color=2), color_scheme=color_scheme)
     #embroider(draw_christmas_tree(6,border_color=1,fill_color=2), color_scheme)
 
-    no_color_embroider(draw_circle(15))
+    #no_color_embroider(draw_circle(15))
 
